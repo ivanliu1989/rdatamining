@@ -1,1 +1,20 @@
 setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\ata_Mining_Work_Space\\rdatamining')
+ind <- sample(2, nrow(iris), replace=TRUE, prob=c(0.7, 0.3))
+trainData <- iris[ind==1,]
+testData <- iris[ind==2,]
+library(randomForest)
+rf <- randomForest(Species ~ ., data=trainData, ntree=100, proximity=TRUE)
+table(predict(rf), trainData$Species)
+print(rf)
+attributes(rf)
+png('random_forest.png')
+plot(rf)
+dev.off()
+importance(rf)
+varImpPlot(rf)
+
+irisPred <- predict(rf, newdata=testData)
+table(irisPred, testData$Species)
+png('random_forest_2.png')
+plot(margin(rf, testData$Species))
+dev.off()
