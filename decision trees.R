@@ -1,0 +1,12 @@
+setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\ata_Mining_Work_Space\\rdatamining')
+library(party)
+str(iris)
+
+iris_ctree <- ctree(Species ~. , data=iris)
+print(iris_ctree)
+png('decision_tree_1.png')
+plot(iris_ctree)
+dev.off()
+png('decision_tree_2.png')
+plot(iris_ctree, type='simple')
+dev.off()
